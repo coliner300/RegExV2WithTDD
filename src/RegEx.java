@@ -7,15 +7,17 @@ public class RegEx
     private String websites;
     private String support;
     private String averagePay;
+    private String batSize;
     private final Scanner scan = new Scanner(System.in);
 
-    public RegEx(String bestPlayers, String bestTeams, String websites, String support, String averagePay)
+    public RegEx(String bestPlayers, String bestTeams, String websites, String support, String averagePay, String batSize)
     {
         this.bestPlayers = checkBestPlayers(bestPlayers);
         this.bestTeams = checkBestTeams(bestTeams);
         this.websites = checkWebsite(websites);
         this.support = checkSupport(support);
         this.averagePay = checkAveragePay(averagePay);
+        this.batSize = checkBatSize(batSize);
     }
 
     public RegEx()
@@ -25,6 +27,7 @@ public class RegEx
         this.websites = "";
         this.support = "";
         this.averagePay = "";
+        this.batSize = "";
     }
 
     public String getBestPlayers()
@@ -47,6 +50,10 @@ public class RegEx
     public String getAveragePay()
     {
         return averagePay;
+    }
+    public String getBatSize()
+    {
+        return batSize;
     }
 
 
@@ -73,6 +80,11 @@ public class RegEx
     public void setAveragePay(String averagePay)
     {
         this.averagePay = checkAveragePay(averagePay);
+    }
+
+    public void setBatSize(String batSize)
+    {
+        this.batSize = checkBatSize(batSize);
     }
 
     private String checkBestPlayers(String name)
@@ -114,9 +126,18 @@ public class RegEx
 
     private String checkAveragePay(String num)
     {
-        if(!num.matches("[0-9]{7}"));
+        if(!num.matches("[0-9]{7}"))
         {
             num = "Average Pay: Invalid";
+        }
+        return num;
+    }
+
+    private String checkBatSize(String num)
+    {
+        if(!num.matches("[0-9]{2}"))
+        {
+            num = "Bat Size: Invalid";
         }
         return num;
     }
@@ -129,6 +150,7 @@ public class RegEx
         output += "\nWebsite: " + websites;
         output += "\nSupport: " + support;
         output += "\nAverage Pay: " + averagePay;
+        output += "\nBat Size: " + batSize;
         return output;
     }
 }
