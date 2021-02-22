@@ -2,89 +2,133 @@ import java.util.Scanner;
 
 public class RegEx
 {
-    Scanner input = new Scanner(System.in);
-    private String firstName;
-    private String lastName;
-    private int age;
-    private boolean isActive;
-    private int stuID;
+    private String bestPlayers;
+    private String bestTeams;
+    private String websites;
+    private String support;
+    private String averagePay;
+    private final Scanner scan = new Scanner(System.in);
+
+    public RegEx(String bestPlayers, String bestTeams, String websites, String support, String averagePay)
+    {
+        this.bestPlayers = checkBestPlayers(bestPlayers);
+        this.bestTeams = checkBestTeams(bestTeams);
+        this.websites = checkWebsite(websites);
+        this.support = checkSupport(support);
+        this.averagePay = checkAveragePay(averagePay);
+    }
 
     public RegEx()
     {
-        firstName = "";
-        lastName = "";
-        age = 0;
-        isActive = false;
-        stuID = 00000;
+        this.bestPlayers = "";
+        this.bestTeams = "";
+        this.websites = "";
+        this.support = "";
+        this.averagePay = "";
     }
 
-    public RegEx(String firstName, String lastName, int age, boolean isActive, int stuID)
+    public String getBestPlayers()
     {
-        this.firstName = validateFirstName(firstName);
-        this.lastName = validateLastName(lastName);
-        this.age = age;
-        this.isActive = isActive;
-        this.stuID = stuID;
+        return bestPlayers;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getBestTeams() {
+        return bestTeams;
     }
 
-    public String getLastName() {
-        return lastName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public boolean getIsActive() {
-        return isActive;
-    }
-
-    public int getStuID() {
-        return stuID;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = validateFirstName(firstName);
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = validateLastName(lastName);
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
-    }
-
-    public void setStuID(int stuID) {
-        this.stuID = stuID;
-    }
-
-    private String validateFirstName(String firstName)
+    public String getWebsite()
     {
-        while(!firstName.matches("[A-Z][a-zA-z]*"))
+        return websites;
+    }
+    public String getSupport()
+    {
+        return support;
+    }
+    public String getAveragePay()
+    {
+        return averagePay;
+    }
+
+
+    public void setBestPlayers(String bestPlayers)
+    {
+        this.bestPlayers = checkBestPlayers(bestPlayers);
+    }
+
+    public void setBestTeams(String bestTeams)
+    {
+        this.bestTeams = checkBestTeams(bestTeams);
+    }
+
+    public void setWebsites(String websites)
+    {
+        this.websites = checkWebsite(websites);
+    }
+
+    public void setSupport(String support)
+    {
+        this.support = checkSupport(support);
+    }
+
+    public void setAveragePay(String averagePay)
+    {
+        this.averagePay = checkAveragePay(averagePay);
+    }
+
+    private String checkBestPlayers(String name)
+    {
+        if(!name.matches("[A-Z][A-Za-z]+"))
         {
-            System.out.println("Format incorrect");
-            firstName = input.nextLine();
+            name = "Best Players: Invalid";
         }
-            return firstName;
-    }//end validateFirstName with regEx
+        return name;
+    }
 
-    private String validateLastName(String lastName)
+    private String checkBestTeams(String name)
     {
-        while(!lastName.matches("[A-Z][a-zA-Z-]*"))
+        if(!name.matches("[A-Z]([A-Za-z]|-)+"))
         {
-            System.out.println("Format incorrect");
-            lastName = input.nextLine();
+            name = "Best Teams: Invalid";
         }
-        return lastName;
-    }//end validateLastname with RegEx
+        return name;
+    }
 
-}//end class RegEx
+
+    private String checkWebsite(String email)
+    {
+        if(!email.matches("[A-Za-z0-9]+@[a-z]+\\.(com|net|edu)"))
+        {
+           email = "Websites: Invalid";
+        }
+        return email;
+    }
+
+    private String checkSupport(String num)
+    {
+        if(!num.matches("\\([0-9]{3}\\)[0-9]{3}-[0-9]{4}"))
+        {
+            num = "Support: Invalid";
+        }
+        return num;
+    }
+
+    private String checkAveragePay(String num)
+    {
+        if(!num.matches("[0-9]{7}"));
+        {
+            num = "Average Pay: Invalid";
+        }
+        return num;
+    }
+
+    public String toString()
+    {
+        String output;
+        output  = "Best Player(First Name): " + bestPlayers;
+        output += "\nBest Teams: " + bestTeams;
+        output += "\nWebsite: " + websites;
+        output += "\nSupport: " + support;
+        output += "\nAverage Pay: " + averagePay;
+        return output;
+    }
+}

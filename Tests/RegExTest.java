@@ -5,126 +5,129 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class RegExTest {
 
+//    @Test
+//    void baseConstructor()
+//    {
+//        RegEx tests = new RegEx("Barry", "Yankees", "mlb@baseball.net", "(808)452-8456", "4380000");
+//        String expected = "Best Player(First Name): Barry" + "\nBest Teams: Yankees" + "\nWebsite: mlb@baseball.net" + "\nSupport: (808)452-8456" + "\nAverage Pay: 4380000";
+//        assertEquals(expected, tests.toString());
+//    }
+
     @Test
-    void FirstNameLetterACapTrue()
+    void bestPlayer()
     {
-        RegEx tester1 = new RegEx();
-        tester1.setFirstName("A");
-        //assertEquals("Bob", tester1.getFirstName());
-        assertTrue( tester1.getFirstName().matches("[A-Z][a-z]*"));
-    }
-    @Test
-    void FirstNameLetterBCapTrue()
-    {
-        RegEx tester1 = new RegEx();
-        tester1.setFirstName("B");
-        //assertEquals("Bob", tester1.getFirstName());
-        assertTrue( tester1.getFirstName().matches("[A-Z][a-z]*"));
-    }
-    @Test
-    void FirstNameStartsWCapTrue()
-    {
-        RegEx tester1 = new RegEx();
-        tester1.setFirstName("Bubbles");
-        //assertEquals("Bob", tester1.getFirstName());
-        assertTrue( tester1.getFirstName().matches("[A-Z][a-z]*"));
-    }
-    @Test
-    void FirstNameLetterbCapFalse()
-    {
-        RegEx tester1 = new RegEx();
-        tester1.setFirstName("b");
-        //assertEquals("Bob", tester1.getFirstName());
-        assertFalse( tester1.getFirstName().matches("[A-Z][a-z]*"));
-    }
-    @Test
-    void FirstNameLetterzCapFalse()
-    {
-        RegEx tester1 = new RegEx();
-        tester1.setFirstName("z");
-        //assertEquals("Bob", tester1.getFirstName());
-        assertFalse( tester1.getFirstName().matches("[A-Z][a-z]*"));
-    }
-    @Test
-    void FirstNameStartsWCapFalse()
-    {
-        RegEx tester1 = new RegEx();
-        tester1.setFirstName("bubbles");
-        //assertEquals("Bob", tester1.getFirstName());
-        assertFalse( tester1.getFirstName().matches("[A-Z][a-z]*"));
-    }
-    @Test
-    void FirstNameHasNumberFalse()
-    {
-        RegEx tester1 = new RegEx();
-        tester1.setFirstName("B1");
-        //assertEquals("Bob", tester1.getFirstName());
-        assertFalse( tester1.getFirstName().matches("[A-Z][a-z]*"));
-    }
-    @Test
-    void FirstNameHasSymbolFalse()
-    {
-        RegEx tester1 = new RegEx();
-        tester1.setFirstName("A&");
-        //assertEquals("Bob", tester1.getFirstName());
-        assertFalse( tester1.getFirstName().matches("[A-Z][a-z]*"));
-    }
-    @Test
-    void FirstNameHasSpaceFalse()
-    {
-        RegEx tester1 = new RegEx();
-        tester1.setFirstName("Bo b");
-        //assertEquals("Bob", tester1.getFirstName());
-        assertFalse( tester1.getFirstName().matches("[A-Z][a-z]*"));
-    }
-    @Test
-    void FirstNameHasHyphenTrue()
-    {
-        RegEx tester1 = new RegEx();
-        tester1.setFirstName("Bo-Derek");
-        //assertEquals("Bob", tester1.getFirstName());
-        assertFalse( tester1.getFirstName().matches("[A-Z]+([-][a-z])*"));
-    }
-/*
-    @Test
-    void getLastName() {
+        RegEx tests = new RegEx();
+        tests.setBestPlayers("Tom");
+        String expected = "Tom";
+        assertEquals(expected, tests.getBestPlayers());
     }
 
     @Test
-    void getAge()
+    void correctTeam()
     {
-        RegEx tester1 = new RegEx();
-        tester1.setAge(20);
-        assertEquals(20, tester1.getAge());
+        RegEx tests = new RegEx();
+        tests.setBestTeams("Dodgers");
+        String expected = "Dodgers";
+        assertEquals(expected, tests.getBestTeams());
     }
 
     @Test
-    void getIsActive() {
+    void wrongName()
+    {
+        RegEx tests = new RegEx();
+        tests.setBestPlayers("Barry Bond");
+        String expected = "Best Players: Invalid";
+        assertEquals(expected, tests.getBestPlayers());
     }
 
     @Test
-    void getStuID() {
+    void wrongTeamName()
+    {
+        RegEx tests = new RegEx();
+        tests.setBestTeams("Yankees and Dodgers");
+        String expected = "Best Teams: Invalid";
+        assertEquals(expected, tests.getBestTeams());
     }
 
     @Test
-    void setFirstName() {
+    void addNumbersToTeam()
+    {
+        RegEx tests = new RegEx();
+        tests.setBestTeams("Yankees1234");
+        String expected = "Best Teams: Invalid";
+        assertEquals(expected, tests.getBestTeams());
     }
 
     @Test
-    void setLastName() {
+    void emailWithNumbers()
+    {
+        RegEx tests = new RegEx();
+        tests.setWebsites("mlb@gmail.123");
+        String expected = "Websites: Invalid";
+        assertEquals(expected, tests.getWebsite());
     }
 
     @Test
-    void setAge() {
+    void correctEmail()
+    {
+        RegEx tests = new RegEx();
+        tests.setWebsites("mlb@gmail.com");
+        String expected = "mlb@gmail.com";
+        assertEquals(expected, tests.getWebsite());
     }
 
     @Test
-    void setActive() {
+    void emailWithWrongEnding()
+    {
+        RegEx tests = new RegEx();
+        tests.setWebsites("mlb@gmail.xyz");
+        String expected = "Websites: Invalid";
+        assertEquals(expected, tests.getWebsite());
     }
 
     @Test
-    void setStuID() {
+    void correctSupport()
+    {
+        RegEx tests = new RegEx();
+        tests.setSupport("(951)123-4567");
+        String expected = "(951)123-4567";
+        assertEquals(expected, tests.getSupport());
     }
 
- */
+    @Test
+    void supportWithoutParenthesis()
+    {
+        RegEx tests = new RegEx();
+        tests.setSupport("951-123-4567");
+        String expected = "Support: Invalid";
+        assertEquals(expected, tests.getSupport());
+    }
+
+    @Test
+    void supportWithExtraNumber()
+    {
+        RegEx tests = new RegEx();
+        tests.setSupport("(951)123-45676");
+        String expected = "Support: Invalid";
+        assertEquals(expected, tests.getSupport());
+    }
+
+    @Test
+    void averagePayWrong()
+    {
+        RegEx tests = new RegEx();
+        tests.setAveragePay("438000");
+        String expected = "Average Pay: Invalid";
+        assertEquals(expected, tests.getAveragePay());
+    }
+
+    @Test
+    void averagePayCorrect()
+    {
+        RegEx tests = new RegEx();
+        tests.setAveragePay("4380000");
+        String expected = "4380000";
+        assertEquals(expected, tests.getAveragePay());
+    }
+
 }
